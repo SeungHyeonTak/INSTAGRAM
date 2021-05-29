@@ -4,6 +4,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 SITE_URL = 'http://127.0.0.1:8001'
+INTERNAL_IPS = ['127.0.0.1']
+
+INSTALLED_APPS += [
+    'debug_toolbar',
+]
+
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
 
 DATABASES = {
     'default': {
