@@ -419,4 +419,8 @@ $RECYCLE.BIN/
 # secret key
 secret.json
 
+# ipynb
+*.ipynb
+*.ipynb_checkpoints/
+
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode,pycharm,macos,windows,linux
