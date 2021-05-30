@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'apps',
+    'core.account',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+AUTH_USER_MODEL = 'account.User'
 
 LANGUAGE_CODE = 'ko-kr'
 
