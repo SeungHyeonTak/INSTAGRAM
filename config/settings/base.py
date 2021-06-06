@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import json
+import datetime
 import os
 from pathlib import Path
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'apps',
+    'apps.api',
     'core.account',
     'core.use',
     'rest_framework',
@@ -78,6 +80,27 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+REST_FRAMEWORK = {
+    # 로그인 여부를 확인하는 클래스
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # 로그인과 관련된 클래스
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',  # JWT 사용
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': get_secret('SECRET_KEY'),  # 비밀키로 어떤걸 사용할지
+    'JWT_ALGORITHM': 'HS256',  # JWT 암호화에 사용되는 알고리즘을 지정
+    'JWT_ALLOW_REFRESH': True,  # JWT 토큰을 갱신할 수 있게 할지 여부 결정
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),  # JWT 토큰의 유효기간을 설정
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),  # JWT 토큰 갱신의 유효기간
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
