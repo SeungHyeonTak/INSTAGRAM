@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps',
     'core.account',
     'core.use',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'apps.api.urls'
 
 TEMPLATES = [
     {
