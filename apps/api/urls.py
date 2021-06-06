@@ -14,16 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import debug_toolbar
+import apps.api.views as rest_views
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
+from rest_framework import routers
 
-app_name = 'apps_api'
+router = routers.DefaultRouter()
+router.register('signup', rest_views.SignupViewSet, basename='signup')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.api.account', namespace='account'))
+    path('api/token/', obtain_jwt_token),  # JWT 토큰을 발행할 때 사용
+    path('api/token/verify/', verify_jwt_token),  # JWT 토큰이 유효한지 검증할 때 사용
+    path('api/token/refresh/', refresh_jwt_token),  # JWT 토큰을 갱신할 때 사용
+    path('', include(router.urls)),
+    path('', include('apps.api.url.account', namespace='account'))
 ]
 
 if settings.DEBUG:

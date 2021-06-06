@@ -1,12 +1,10 @@
-import apps.api.views as rest_view
+import apps.api.views as rest_views
 from django.urls import path, include
-from rest_framework import routers
 
 app_name = 'account'
 
-router = routers.DefaultRouter()
-router.register('account/authorization/signup/', rest_view)  # 회원가입 api
+signup = rest_views.SignupViewSet.as_view({'post': 'create'})
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('account/authorization/signup/', signup, name='signup'),  # 회원가입 api
 ]
